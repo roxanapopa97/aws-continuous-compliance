@@ -1,0 +1,51 @@
+name: terraform-module-setup
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*.*'
+defaults:
+  run:
+    shell: bash
+
+env:
+  AWS_DEFAULT_REGION: us-east-1
+  TEST_FOLDER: test
+
+jobs:
+  security_check:
+    runs-on: ubuntu-latest
+    container: 
+      image: roxanapopa/docker-git-workflows:v0.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Running Checkov
+        run: checkov -d .
+
+  deploy:
+    # needs: [security_check]
+    runs-on: ubuntu-latest
+    container: 
+      image: roxanapopa/docker-git-workflows:v0.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.CICD_ROLE_ARN }}
+          role-session-name: cicd-session
+          role-duration-seconds: 3600
+      - name: Terraform Apply
+        run: |
+          terraform init
+          terraform apply
+      # - name: Terraform Destroy
+      #   run: |
+      #     terraform init
+      #     terraform destroy
