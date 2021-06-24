@@ -37,6 +37,7 @@ module "setup_organization" {
   }
 }
 
+# Extract audit account id
 locals {
     audit_account_id = coalesce([ for account in module.setup_organization.non_master_accounts[*]: account.name == "audit" ? account.id : null ])     
 }
