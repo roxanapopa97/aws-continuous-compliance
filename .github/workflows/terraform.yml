@@ -17,7 +17,7 @@ jobs:
   security_check:
     runs-on: ubuntu-latest
     container: 
-      image: roxanapopa/docker-git-workflows:v0.1
+      image: roxanapopa/docker-git-workflows:v0.2
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
     # needs: [security_check]
     runs-on: ubuntu-latest
     container: 
-      image: roxanapopa/docker-git-workflows:v0.1
+      image: roxanapopa/docker-git-workflows:v0.2
     steps:
       - name: Checkout
         uses: actions/checkout@v2
