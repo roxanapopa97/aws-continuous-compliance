@@ -1,5 +1,5 @@
 module "setup_organization" {
-  source = "github.com/roxanapopa97/aws-organization.git?ref=v0.1"
+  source = "github.com/roxanapopa97/aws-organization?ref=v0.1"
   create_organization = true
   organizational_units = {
     "prod_organizational_unit" : {
