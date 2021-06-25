@@ -40,7 +40,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - arn:aws:iam::<Account-Id>:role/S3OperationsAutomationsExecutionRole
+              - arn:aws:iam::<Account-Id>:role/TerraformAutomationRole
         S3BucketName:
           ResourceValue:
             Value: "RESOURCE_ID"
@@ -77,7 +77,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - arn:aws:iam::<Account-Id>:role/S3OperationsAutomationsExecutionRole
+              - arn:aws:iam::<Account-Id>:role/TerraformAutomationRole
         S3BucketName:
           ResourceValue:
             Value: "RESOURCE_ID"
@@ -136,7 +136,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - arn:aws:iam::<Account-Id>:role/S3OperationsAutomationsExecutionRole
+              - arn:aws:iam::<Account-Id>:role/TerraformAutomationRole
         BucketName:
           ResourceValue:
             Value: "RESOURCE_ID"
@@ -176,7 +176,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - arn:aws:iam::<Account-Id>:role/S3OperationsAutomationsExecutionRole
+              - arn:aws:iam::<Account-Id>:role/TerraformAutomationRole
         BucketName:
           ResourceValue:
             Value: "RESOURCE_ID"
