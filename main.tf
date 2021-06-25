@@ -107,3 +107,13 @@ module "setup_config_audit" {
   setup_config            = true
   aws_config_bucket_name  = "aws-config-bucket-${local.audit_account_id}"
 }
+
+module "deploy_config_aggregator" {
+  source = "github.com/roxanapopa97/aws-config?ref=v0.1"
+  providers = {
+    aws = aws.audit
+  }
+  create_conformance_pack = false
+  create_aggregator       = true
+  setup_config            = false
+}
