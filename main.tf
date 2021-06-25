@@ -117,3 +117,39 @@ module "deploy_config_aggregator" {
   create_aggregator       = true
   setup_config            = false
 }
+
+module "deploy_conformance_pack_dev" {
+  source = "github.com/roxanapopa97/aws-config?ref=v0.1"
+  providers = {
+    aws = aws.dev
+  }
+  create_conformance_pack = true
+  create_aggregator       = false
+  setup_config            = false
+  conformance_pack_name   = "Operational-Best-Practices-for-Amazon-S3-With-Remediation"
+  conformance_pack_input_parameters = [
+    {
+      parameter_name  = "S3TargetBucketNameForEnableLogging"
+      parameter_value = "bad-bucket-for-testing-config-${local.dev_account_id}"
+    }
+  ]
+  conformance_pack_template = file("${path.module}/conformance_packs/Operational-Best-Practices-for-Amazon-S3-with-Remediation.yaml")
+}
+
+module "deploy_conformance_pack_prod" {
+  source = "github.com/roxanapopa97/aws-config?ref=v0.1"
+  providers = {
+    aws = aws.prod
+  }
+  create_conformance_pack = true
+  create_aggregator       = false
+  setup_config            = false
+  conformance_pack_name   = "Operational-Best-Practices-for-Amazon-S3-With-Remediation"
+  conformance_pack_input_parameters = [
+    {
+      parameter_name  = "S3TargetBucketNameForEnableLogging"
+      parameter_value = "bad-bucket-for-testing-config-${local.prod_account_id}"
+    }
+  ]
+  conformance_pack_template = file("${path.module}/conformance_packs/Operational-Best-Practices-for-Amazon-S3-with-Remediation.yaml")
+}
