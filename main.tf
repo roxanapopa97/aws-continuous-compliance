@@ -131,6 +131,10 @@ module "deploy_conformance_pack_dev" {
     {
       parameter_name  = "S3TargetBucketNameForEnableLogging"
       parameter_value = "bad-bucket-for-testing-config-${local.dev_account_id}"
+    },
+    {
+      parameter_name  = "AutomationAssumeRoleArn"
+      parameter_value = "- arn:aws:iam::${local.dev_account_id}:role/TerraformAutomationRole"
     }
   ]
   conformance_pack_template = file("${path.module}/conformance_packs/Operational-Best-Practices-for-Amazon-S3-with-Remediation.yaml")
@@ -149,6 +153,10 @@ module "deploy_conformance_pack_prod" {
     {
       parameter_name  = "S3TargetBucketNameForEnableLogging"
       parameter_value = "bad-bucket-for-testing-config-${local.prod_account_id}"
+    },
+    {
+      parameter_name  = "AutomationAssumeRoleArn"
+      parameter_value = "- arn:aws:iam::${local.prod_account_id}:role/TerraformAutomationRole"
     }
   ]
   conformance_pack_template = file("${path.module}/conformance_packs/Operational-Best-Practices-for-Amazon-S3-with-Remediation.yaml")
