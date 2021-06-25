@@ -143,7 +143,7 @@ module "deploy_conformance_pack_dev" {
 module "deploy_conformance_pack_prod" {
   source = "github.com/roxanapopa97/aws-config?ref=v0.1"
   providers = {
-    aws = aws.dev
+    aws = aws.prod
   }
   create_conformance_pack = true
   create_aggregator       = false
