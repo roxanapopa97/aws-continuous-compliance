@@ -80,8 +80,10 @@ module "setup_config_prod" {
   providers = {
     aws = aws.prod
   }
-  setup_config = true
-  aws_config_bucket_name = "aws-config-bucket-${local.prod_account_id}"
+  create_conformance_pack = false
+  create_aggregator       = false
+  setup_config            = true
+  aws_config_bucket_name  = "aws-config-bucket-${local.prod_account_id}"
 }
 
 module "setup_config_dev" {
@@ -89,8 +91,10 @@ module "setup_config_dev" {
   providers = {
     aws = aws.dev
   }
-  setup_config = true
-  aws_config_bucket_name = "aws-config-bucket-${local.dev_account_id}"
+  create_conformance_pack = false
+  create_aggregator       = false
+  setup_config            = true
+  aws_config_bucket_name  = "aws-config-bucket-${local.dev_account_id}"
 }
 
 module "setup_config_audit" {
@@ -98,6 +102,8 @@ module "setup_config_audit" {
   providers = {
     aws = aws.audit
   }
-  setup_config = true
-  aws_config_bucket_name = "aws-config-bucket-${local.audit_account_id}"
+  create_conformance_pack = false
+  create_aggregator       = false
+  setup_config            = true
+  aws_config_bucket_name  = "aws-config-bucket-${local.audit_account_id}"
 }
