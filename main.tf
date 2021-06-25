@@ -133,7 +133,7 @@ module "deploy_conformance_pack_dev" {
       parameter_value = "bad-bucket-for-testing-config-${local.dev_account_id}"
     },
     {
-      parameter_name  = "AutomationAssumeRoleArn"
+      parameter_name  = "AutomationRoleArn"
       parameter_value = "arn:aws:iam::${local.dev_account_id}:role/TerraformAutomationRole"
     }
   ]
@@ -143,7 +143,7 @@ module "deploy_conformance_pack_dev" {
 module "deploy_conformance_pack_prod" {
   source = "github.com/roxanapopa97/aws-config?ref=v0.1"
   providers = {
-    aws = aws.prod
+    aws = aws.dev
   }
   create_conformance_pack = true
   create_aggregator       = false
@@ -155,7 +155,7 @@ module "deploy_conformance_pack_prod" {
       parameter_value = "bad-bucket-for-testing-config-${local.prod_account_id}"
     },
     {
-      parameter_name  = "AutomationAssumeRoleArn"
+      parameter_name  = "AutomationRoleArn"
       parameter_value = "arn:aws:iam::${local.prod_account_id}:role/TerraformAutomationRole"
     }
   ]

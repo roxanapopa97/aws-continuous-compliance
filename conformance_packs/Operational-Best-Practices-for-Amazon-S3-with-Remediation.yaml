@@ -11,8 +11,8 @@ Parameters:
   S3TargetBucketNameForEnableLogging:
     Description: The target s3 bucket where the logging should be enabled.
     Type: String
-  AutomationAssumeRoleArn:
-    Description: The role to be assumed for remediation
+  AutomationRoleArn:
+    Description: ARN of the role that should be used for remediation
     Type: String
 Resources:
   S3BucketPublicReadProhibited:
@@ -43,7 +43,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - Ref: AutomationAssumeRoleArn
+              - Ref: AutomationRoleArn
         S3BucketName:
           ResourceValue:
             Value: "RESOURCE_ID"
@@ -80,7 +80,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - Ref: AutomationAssumeRoleArn
+              - Ref: AutomationRoleArn
         S3BucketName:
           ResourceValue:
             Value: "RESOURCE_ID"
@@ -139,7 +139,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - Ref: AutomationAssumeRoleArn
+              - Ref: AutomationRoleArn
         BucketName:
           ResourceValue:
             Value: "RESOURCE_ID"
@@ -179,7 +179,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - Ref: AutomationAssumeRoleArn
+              - Ref: AutomationRoleArn
         BucketName:
           ResourceValue:
             Value: "RESOURCE_ID"
