@@ -34,9 +34,12 @@ module "setup_organization" {
 
 locals {
     # Extract account ids
-    audit_account_id = coalesce([ for account in module.setup_organization.non_master_accounts[*]: account.name == "audit" ? account.id : null ])     
-    prod_account_id = coalesce([ for account in module.setup_organization.non_master_accounts[*]: account.name == "prod" ? account.id : null ])
-    dev_account_id = coalesce([ for account in module.setup_organization.non_master_accounts[*]: account.name == "dev" ? account.id : null ])
+    audit_account_id = module.setup_organization.non_master_accounts[2]
+    prod_account_id = module.setup_organization.non_master_accounts[0]
+    dev_account_id = module.setup_organization.non_master_accounts[1]
+    # audit_account_id = coalesce([ for account in module.setup_organization.non_master_accounts[*]: account.name == "audit" ? account.id : null ])     
+    # prod_account_id = coalesce([ for account in module.setup_organization.non_master_accounts[*]: account.name == "prod" ? account.id : null ])
+    # dev_account_id = coalesce([ for account in module.setup_organization.non_master_accounts[*]: account.name == "dev" ? account.id : null ])
 }
 
 # Contul de audit trebuie sa devina delegated administrator
