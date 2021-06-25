@@ -51,3 +51,53 @@ resource "aws_organizations_delegated_administrator" "audit" {
 
 # Este necesara crearea unui provider pentru fiecare cont
 # pentru a putea face assume role in fiecare account in parte
+provider "aws" {
+  alias = "prod"
+  assume_role {
+    role_arn     = "arn:aws:iam::${local.prod_account_id}:role/TerraformAutomationRole"
+    session_name = "terraform-ci-cd-prod-session"
+  }
+}
+
+provider "aws" {
+  alias = "dev"
+  assume_role {
+    role_arn     = "arn:aws:iam::${local.dev_account_id}:role/TerraformAutomationRole"
+    session_name = "terraform-ci-cd-prod-session"
+  }
+}
+
+provider "aws" {
+  alias = "audit"
+  assume_role {
+    role_arn     = "arn:aws:iam::${local.audit_account_id}:role/TerraformAutomationRole"
+    session_name = "terraform-ci-cd-prod-session"
+  }
+}
+
+module "setup_config_prod" {
+  source = "github.com/roxanapopa97/aws-config?ref=v0.1"
+  providers = {
+    aws = aws.prod
+  }
+  setup_config = true
+  aws_config_bucket_name = "aws-config-bucket-${local.prod_account_id}"
+}
+
+module "setup_config_dev" {
+  source = "github.com/roxanapopa97/aws-config?ref=v0.1"
+  providers = {
+    aws = aws.dev
+  }
+  setup_config = true
+  aws_config_bucket_name = "aws-config-bucket-${local.dev_account_id}"
+}
+
+module "setup_config_audit" {
+  source = "github.com/roxanapopa97/aws-config?ref=v0.1"
+  providers = {
+    aws = aws.audit
+  }
+  setup_config = true
+  aws_config_bucket_name = "aws-config-bucket-${local.audit_account_id}"
+}
