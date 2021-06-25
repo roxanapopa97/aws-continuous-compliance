@@ -134,7 +134,7 @@ module "deploy_conformance_pack_dev" {
     },
     {
       parameter_name  = "AutomationAssumeRoleArn"
-      parameter_value = "- arn:aws:iam::${local.dev_account_id}:role/TerraformAutomationRole"
+      parameter_value = "- arn:aws:iam::${local.dev_account_id}:role/S3OperationsAutomationsExecutionRole"
     }
   ]
   conformance_pack_template = file("${path.module}/conformance_packs/Operational-Best-Practices-for-Amazon-S3-with-Remediation.yaml")
@@ -156,7 +156,7 @@ module "deploy_conformance_pack_prod" {
     },
     {
       parameter_name  = "AutomationAssumeRoleArn"
-      parameter_value = "- arn:aws:iam::${local.prod_account_id}:role/TerraformAutomationRole"
+      parameter_value = "- arn:aws:iam::${local.prod_account_id}:role/S3OperationsAutomationsExecutionRole"
     }
   ]
   conformance_pack_template = file("${path.module}/conformance_packs/Operational-Best-Practices-for-Amazon-S3-with-Remediation.yaml")
